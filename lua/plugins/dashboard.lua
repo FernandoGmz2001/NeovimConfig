@@ -29,6 +29,13 @@ return {
 						key = "r",
 						action = "Telescope oldfiles",
 					},
+					{
+						icon = " ",
+						desc = "Exit",
+						group = "@variable",
+						key = "q",
+						action = "q!",
+					},
 				},
 				header = {
 					[[                                                                       ]],

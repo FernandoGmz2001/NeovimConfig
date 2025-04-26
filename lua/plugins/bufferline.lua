@@ -1,1 +1,1 @@
-return { "akinsho/bufferline.nvim", version = "*" }
+return { "akinsho/bufferline.nvim", version = "*", mode = "buffers" }

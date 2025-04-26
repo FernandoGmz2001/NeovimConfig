@@ -4,7 +4,8 @@ local keymap = vim.keymap
 -- Mapeos generales
 keymap.set("n", "<leader>z", ":ZenMode <CR>")
 keymap.set("n", "WW", vim.cmd.write)
-keymap.set("n", "QQ", ":wqa<Return>")
+-- keymap.set("n", "QQ", ":wqa<Return>")
+keymap.set("n", "QQ", ":confirm qa<Return>", { noremap = true, silent = true })
 keymap.set("n", ";q", ":bd<Return>")
 keymap.set("n", "<esc>", ":noh<CR>")
 keymap.set("n", "<C-a>", "gg<S-v>G")
