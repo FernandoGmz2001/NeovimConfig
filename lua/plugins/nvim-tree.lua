@@ -11,9 +11,9 @@ return {
 
 		nvimtree.setup({
 			view = {
-				side = "right",
+				side = "left",
 				adaptive_size = true,
-				relativenumber = true,
+				relativenumber = false,
 				float = {
 					enable = false,
 					quit_on_focus_loss = true,
