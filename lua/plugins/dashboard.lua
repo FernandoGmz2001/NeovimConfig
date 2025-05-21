@@ -68,7 +68,7 @@ return {
 					[[                                                                       ]],
 					[[                                                                       ]],
 					[[                                                                       ]],
-					[[                              Disfruto no chambear...                            ]],
+					[[                              Disfruto de no chambear...                            ]],
 				},
 			},
 			vertical_center = false,
