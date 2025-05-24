@@ -5,12 +5,12 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>z", ":ZenMode <CR>")
 keymap.set("n", "WW", vim.cmd.write)
 -- keymap.set("n", "QQ", ":wqa<Return>")
-keymap.set("n", "QQ", ":confirm qa<Return>", { noremap = true, silent = true })
-keymap.set("n", ";q", ":bd<Return>")
+keymap.set("n", "QQ", "<cmd>confirm qa<Return>", { noremap = true, silent = true })
+keymap.set("n", ";q", "<cmd>bd<Return>")
 keymap.set("n", "<esc>", ":noh<CR>")
 keymap.set("n", "<C-a>", "gg<S-v>G")
-keymap.set("n", "ss", ":split<Return>", opts)
-keymap.set("n", "sv", ":vsplit<Return>", opts)
+keymap.set("n", "ss", "<cmd>split<Return>", opts)
+keymap.set("n", "sv", "<cmd>vsplit<Return>", opts)
 keymap.set({ "n", "v" }, "d", '"_d')
 
 -- Mapeo para eliminar con Ctrl + Backspace en modo inserción

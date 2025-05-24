@@ -36,6 +36,15 @@ return {
 						key = "q",
 						action = "q!",
 					},
+					{
+						icon = "󰦛 ", -- Icono sugerido (puedes cambiarlo)
+						desc = "Last Session",
+						group = "@property",
+						key = "l",
+						action = function()
+							require("persistence").load({ last = true })
+						end,
+					},
 				},
 				header = {
 					[[                                                                       ]],
@@ -59,11 +68,11 @@ return {
 					[[                                                                       ]],
 					[[                                                                       ]],
 					[[                                                                       ]],
-					[[                              Disfruto no chambear...                            ]],
+					[[                              Disfruto de no chambear...                            ]],
 				},
 			},
 			vertical_center = false,
 		})
 	end,
-	dependencies = { { "nvim-tree/nvim-web-devicons" } },
+	dependencies = { { "nvim-tree/nvim-web-devicons" }, { "folke/persistence.nvim" } },
 }

@@ -59,16 +59,20 @@ vim.keymap.set("n", ";a", "<cmd>AerialToggle!<CR>")
 
 vim.opt.updatetime = 500
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  underline = true,
-  signs = true,
-})
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+-- 	virtual_text = true,
+-- 	underline = true,
+-- 	signs = true,
+-- })
+
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx)
+	require("ts-error-translator").translate_diagnostics(err, result, ctx)
+	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
+end
 
 vim.api.nvim_set_keymap(
-  "n",
-  "<leader>i",
-  '<cmd>lua vim.diagnostic.open_float({focus = true, scope = "cursor"})<CR>',
-  { noremap = true, silent = true }
+	"n",
+	"<leader>i",
+	'<cmd>lua vim.diagnostic.open_float({focus = true, scope = "cursor"})<CR>',
+	{ noremap = true, silent = true }
 )
-

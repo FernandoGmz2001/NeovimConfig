@@ -1,23 +1,20 @@
 return {
 	"folke/snacks.nvim",
-	enabled = true,
 	priority = 1000,
 	lazy = false,
+	---@type snacks.Config
 	opts = {
-		bigfile = { enabled = true },
+		bigfile = { enabled = false },
 		dashboard = { enabled = false },
 		explorer = { enabled = false },
-		indent = { enabled = true },
-		input = { enabled = false },
+		indent = { enabled = false },
+		input = { enabled = true },
 		picker = { enabled = false },
 		notifier = { enabled = false },
-		quickfile = { enabled = true },
-		scope = { enabled = true },
+		quickfile = { enabled = false },
+		scope = { enabled = false },
 		scroll = { enabled = false },
-		statuscolumn = { enabled = true },
+		statuscolumn = { enabled = false },
 		words = { enabled = true },
-	},
-	keys = {
-		-- { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
 	},
 }

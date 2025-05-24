@@ -78,6 +78,16 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
+		-- Configuración de diagnósticos global
+		vim.diagnostic.config({
+			virtual_text = true, -- Habilita el texto inline
+			signs = true, -- Muestra íconos en el gutter
+			update_in_insert = false,
+			underline = true,
+			severity_sort = true,
+			float = { border = "rounded" },
+		})
+
 		mason_lspconfig.setup_handlers({
 			-- default handler for installed servers
 			function(server_name)
