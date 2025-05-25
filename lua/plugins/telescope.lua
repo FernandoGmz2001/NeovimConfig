@@ -9,6 +9,10 @@ return {
 		{ ";b", "<cmd>Telescope buffers<cr>", desc = "Find buffers" },
 	},
 	config = function()
+		local builtin = require("telescope.builtin")
+		vim.keymap.set("n", "<leader>nf", function()
+			builtin.find_files({ cwd = vim.fn.stdpath("config") })
+		end, { desc = "Open nvim files" })
 		require("telescope").setup({
 			defaults = {
 				layout_config = {

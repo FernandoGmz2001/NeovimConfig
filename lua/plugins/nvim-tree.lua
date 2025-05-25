@@ -15,14 +15,14 @@ return {
 				adaptive_size = true,
 				relativenumber = false,
 				float = {
-					enable = false,
+					enable = true,
 					quit_on_focus_loss = true,
 					open_win_config = {
 						relative = "editor",
 						border = "rounded",
-						height = 25,
-						row = 2,
-						col = math.floor((vim.o.columns - 50) / 2),
+						height = 100,
+						-- row = 2,
+						-- col = math.floor((vim.o.columns - 50) / 2),
 					},
 				},
 			},
