@@ -7,6 +7,13 @@ return {
 			vim.opt.lazyredraw = false
 		end,
 		opts = {
+			views = {
+				mini = {
+					win_options = {
+						winblend = 0,
+					},
+				},
+			},
 			messages = { view = "mini", view_warn = "mini" },
 			lsp = {
 				override = {

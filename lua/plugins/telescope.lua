@@ -17,18 +17,15 @@ return {
 			defaults = {
 				layout_config = {
 					vertical = { width = 0.5 },
-					-- other layout configuration here
 				},
-				-- ...
 			},
 			pickers = {
 				find_files = {
-					theme = "dropdown",
+					hidden = true,
+					-- theme = "dropdown",
 				},
 			},
-			extensions = {
-				-- ...
-			},
+			extensions = {},
 		})
 	end,
 }
