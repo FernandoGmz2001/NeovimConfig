@@ -6,6 +6,13 @@ return {
 		init = function()
 			vim.opt.lazyredraw = false
 		end,
+		views = {
+			mini = {
+				win_options = {
+					winblend = 0,
+				},
+			},
+		},
 		opts = {
 			messages = { view = "mini", view_warn = "mini" },
 			lsp = {
