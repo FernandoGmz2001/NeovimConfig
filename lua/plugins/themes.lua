@@ -6,13 +6,12 @@ return {
 			require("onedarkpro").setup({
 				options = {
 					cursorline = false, -- Use cursorline highlighting?
-					transparency = true, -- Use a transparent background?
+					transparency = false, -- Use a transparent background?
 					terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
 					lualine_transparency = true, -- Center bar transparency?
 					highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
 				},
 			})
-			vim.cmd([[colorscheme onedark_vivid]])
 		end,
 	},
 	{
@@ -22,6 +21,16 @@ return {
 		config = function()
 			-- vim.cmd([[colorscheme catppuccin-macchiato]])
 			-- require("catppuccin").setup()
+		end,
+	},
+	{
+		"samharju/synthweave.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000,
+		config = function()
+			-- vim.cmd.colorscheme("synthweave")
+			-- transparent version
+			-- vim.cmd.colorscheme("synthweave-transparent")
 		end,
 	},
 }

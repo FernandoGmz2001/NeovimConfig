@@ -12,6 +12,12 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "ss", "<cmd>split<Return>", opts)
 keymap.set("n", "sv", "<cmd>vsplit<Return>", opts)
 keymap.set({ "n", "v" }, "d", '"_d')
+keymap.set("n", "<Tab>", function()
+	require("nvchad.tabufline").next()
+end)
+keymap.set("n", "<S-Tab>", function()
+	require("nvchad.tabufline").prev()
+end)
 
 -- Mapeo para eliminar con Ctrl + Backspace en modo inserción
 vim.keymap.set("i", "<C-H>", "<C-W>", opts)

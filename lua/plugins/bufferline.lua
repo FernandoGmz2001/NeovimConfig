@@ -1,5 +1,6 @@
 return {
 	"akinsho/bufferline.nvim",
+	enabled = false,
 	lazy = false,
 	event = "VeryLazy",
 	keys = {
@@ -8,6 +9,8 @@ return {
 	},
 	opts = {
 		options = {
+			diagnostics = "nvim_lsp",
+			color_icons = true,
 			mode = "buffers",
 			show_buffer_close_icons = false,
 			show_close_icon = false,
