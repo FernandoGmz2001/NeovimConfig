@@ -18,6 +18,9 @@ end)
 keymap.set("n", "<S-Tab>", function()
 	require("nvchad.tabufline").prev()
 end)
+keymap.set("n", "<leader>t", function()
+	require("nvchad.themes").open()
+end)
 
 -- Mapeo para eliminar con Ctrl + Backspace en modo inserción
 vim.keymap.set("i", "<C-H>", "<C-W>", opts)
