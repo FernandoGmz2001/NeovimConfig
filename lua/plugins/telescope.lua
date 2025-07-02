@@ -19,39 +19,6 @@ return {
 			"<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
 			desc = "Open current buffer in file browser",
 		},
-		{
-			"sf",
-			function()
-				local telescope = require("telescope")
-				local fb_actions = telescope.extensions.file_browser.actions
-				local function telescope_buffer_dir()
-					return vim.fn.expand("%:p:h")
-				end
-				telescope.extensions.file_browser.file_browser({
-					winblend = 0,
-					path = "%:p:h",
-					cwd = telescope_buffer_dir(),
-					respect_gitignore = false,
-					hidden = true,
-					grouped = true,
-					previewer = false,
-					initial_mode = "normal",
-					sorting_strategy = "ascending",
-					layout_config = {
-						prompt_position = "top",
-						vertical = { width = 0.5 },
-						-- height = 40,
-					},
-					mappings = {
-						["n"] = {
-							["N"] = fb_actions.create,
-							["h"] = fb_actions.goto_parent_dir,
-						},
-					},
-				})
-			end,
-			desc = "Open File Browser with the path of the current buffer",
-		},
 	},
 	config = function()
 		local builtin = require("telescope.builtin")
