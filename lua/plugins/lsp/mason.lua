@@ -23,8 +23,12 @@ return {
 				},
 			},
 		})
-
 		mason_lspconfig.setup({
+			automatic_enable = {
+				"lua_ls",
+				"ts_ls",
+				"vue_ls",
+			},
 			ensure_installed = {
 				"ts_ls",
 				"html",
@@ -32,6 +36,7 @@ return {
 				"tailwindcss",
 				"lua_ls",
 				"emmet_ls",
+				"vue_ls",
 			},
 		})
 
