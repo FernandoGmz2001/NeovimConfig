@@ -52,7 +52,6 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.splitkeep = "cursor"
 vim.o.hlsearch = false
 vim.lsp.enable("ts_ls")
-vim.lsp.enable("volar")
 
 -- vim.opt.winblend = 15
 -- vim.opt.pumblend = 14
