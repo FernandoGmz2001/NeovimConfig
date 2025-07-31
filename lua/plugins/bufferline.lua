@@ -1,6 +1,6 @@
 return {
 	"akinsho/bufferline.nvim",
-	enabled = false,
+	enabled = true,
 	lazy = false,
 	event = "VeryLazy",
 	keys = {

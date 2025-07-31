@@ -5,12 +5,13 @@ return {
 		config = function()
 			require("onedarkpro").setup({
 				options = {
-					cursorline = false, -- Use cursorline highlighting?
+					cursorline = true, -- Use cursorline highlighting?
 					transparency = false, -- Use a transparent background?
 					terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
 					lualine_transparency = true, -- Center bar transparency?
 					highlight_inactive_windows = false, -- When the window is out of focus, change the normal background?
 				},
+				vim.cmd("colorscheme onedark_vivid"),
 			})
 		end,
 	},
@@ -20,10 +21,10 @@ return {
 		priority = 1000,
 		opts = {},
 		config = function()
-			-- require("catppuccin").setup({
-			-- 	transparent_background = true,
-			-- })
-			-- vim.cmd([[colorscheme catppuccin-macchiato]])
+			require("catppuccin").setup({
+				transparent_background = true,
+			})
+			-- vim.cmd([[colorscheme catppuccin-mocha]])
 		end,
 	},
 	{

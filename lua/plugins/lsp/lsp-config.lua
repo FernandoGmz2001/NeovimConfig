@@ -1,22 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
-	event = { "BufReadPre", "BufNewFile" },
-	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
-		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
-	},
 	config = function()
-		-- import lspconfig plugin
-		--
-		local lspconfig = require("lspconfig")
-
-		-- import mason_lspconfig plugin
-		local mason_lspconfig = require("mason-lspconfig")
-
-		-- import cmp-nvim-lsp plugin
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local keymap = vim.keymap -- for conciseness
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -43,7 +27,10 @@ return {
 				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
 
 				opts.desc = "See available code actions"
-				keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
+				keymap.set({ "n", "x" }, "<leader>ca", function()
+					require("tiny-code-action").code_action()
+				end, { noremap = true, silent = true })
+				-- keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
 
 				opts.desc = "Smart rename"
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
@@ -68,45 +55,63 @@ return {
 			end,
 		})
 
-		-- used to enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
-		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
-
-		-- Configuración de diagnósticos global
-		vim.diagnostic.config({
-			virtual_text = true, -- Habilita el texto inline
-			signs = true, -- Muestra íconos en el gutter
-			update_in_insert = false,
-			underline = true,
-			severity_sort = true,
-			float = { border = "rounded" },
-		})
-		-- mason_lspconfig.setup({
-		-- 	handlers = {
-		-- 		function(server_name)
-		-- 			require("lspconfig")[server_name].setup({})
-		-- 		end,
-		-- 	},
-		-- })
-		-- lspconfig.vue_ls.setup({})
-		lspconfig.ts_ls.setup({
-			capabilities = capabilities,
-			init_options = {
-				plugins = {
-					{
-						name = "@vue/typescript-plugin",
-						location = "/home/ferdev/.nvm/versions/node/v22.14.0/lib/node_modules/@vue/typescript-plugin",
-						languages = { "javascript", "typescript", "vue" },
+		local vue_language_server_path = vim.fn.stdpath("data")
+			.. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+		-- local vue_language_server_path =
+		-- 	"/home/ferdev/.nvm/versions/node/v22.14.0/lib/node_modules/@vue/typescript-plugin"
+		local vue_plugin = {
+			name = "@vue/typescript-plugin",
+			location = vue_language_server_path,
+			languages = { "vue" },
+			configNamespace = "typescript",
+		}
+		local vtsls_config = {
+			settings = {
+				vtsls = {
+					tsserver = {
+						globalPlugins = {
+							vue_plugin,
+						},
 					},
 				},
 			},
 			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-		})
+		}
+
+		local vue_ls_config = {
+			on_init = function(client)
+				client.handlers["tsserver/request"] = function(_, result, context)
+					local clients = vim.lsp.get_clients({ bufnr = context.bufnr, name = "vtsls" })
+					if #clients == 0 then
+						vim.notify(
+							"Could not find `vtsls` lsp client, `vue_ls` would not work without it.",
+							vim.log.levels.ERROR
+						)
+						return
+					end
+					local ts_client = clients[1]
+
+					local param = unpack(result)
+					local id, command, payload = unpack(param)
+					ts_client:exec_cmd({
+						title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
+						command = "typescript.tsserverRequest",
+						arguments = {
+							command,
+							payload,
+						},
+					}, { bufnr = context.bufnr }, function(_, r)
+						local response_data = { { id, r.body } }
+						---@diagnostic disable-next-line: param-type-mismatch
+						client:notify("tsserver/response", response_data)
+					end)
+				end
+			end,
+		}
+
+		-- nvim 0.11 or above
+		vim.lsp.config("vtsls", vtsls_config)
+		vim.lsp.config("vue_ls", vue_ls_config)
+		vim.lsp.enable({ "vtsls", "vue_ls" })
 	end,
 }

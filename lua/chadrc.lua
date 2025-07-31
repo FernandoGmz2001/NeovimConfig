@@ -1,19 +1,20 @@
 local options = {
 
 	base46 = {
-		theme = "github_dark", -- default theme
+		theme = "onedark", -- default theme
 		hl_add = {},
 		hl_override = {},
 		integrations = {},
 		changed_themes = {},
 		transparency = false,
-		theme_toggle = { "github_dark", "one_light" },
+		enabled = false,
+		theme_toggle = { "onedark", "one_light" },
 	},
 
 	ui = {
 		cmp = {
 			icons_left = true, -- only for non-atom styles!
-			style = "atom_colored", -- default/flat_light/flat_dark/atom/atom_colored
+			style = "default", -- default/flat_light/flat_dark/atom/atom_colored
 			abbr_maxwidth = 60,
 			-- for tailwind, css lsp etc
 			format_colors = { lsp = true, icon = "󱓻" },
@@ -32,7 +33,7 @@ local options = {
 		},
 		-- lazyload it when there are 1+ buffers
 		tabufline = {
-			enabled = true,
+			enabled = false,
 			lazyload = false,
 			order = { "treeOffset", "buffers", "tabs", "btns" },
 			modules = nil,

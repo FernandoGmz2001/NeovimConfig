@@ -9,21 +9,16 @@ keymap.set("n", "QQ", "<cmd>confirm qa<Return>", { noremap = true, silent = true
 keymap.set("n", ";q", "<cmd>Bdelete<Return>")
 keymap.set("n", "<esc>", ":noh<CR>")
 keymap.set("n", "<C-a>", "gg<S-v>G")
-keymap.set("n", "ss", "<cmd>split<Return>", opts)
-keymap.set("n", "sv", "<cmd>vsplit<Return>", opts)
+keymap.set("n", "<leader>ss", "<cmd>split<Return>", opts)
+keymap.set("n", "<leader>sv", "<cmd>vsplit<Return>", opts)
+keymap.set("n", "<leader>nd", "<cmd>:NoiceDismiss<Return>", opts)
 keymap.set({ "n", "v" }, "d", '"_d')
-keymap.set("n", "<Tab>", function()
-	require("nvchad.tabufline").next()
-end)
-keymap.set("n", "<S-Tab>", function()
-	require("nvchad.tabufline").prev()
-end)
 keymap.set("n", "<leader>t", function()
 	require("nvchad.themes").open()
 end)
 
 -- Mapeo para eliminar con Ctrl + Backspace en modo inserción
-vim.keymap.set("i", "<C-H>", "<C-W>", opts)
+keymap.set("i", "<C-H>", "<C-W>", opts)
 -- Función para obtener la selección visual
 function vim.getVisualSelection()
 	vim.cmd('noau normal! "vy"') -- Copia la selección visual al registro 'v'

@@ -12,6 +12,7 @@ vim.opt.smartcase = true
 -- Decrease update time
 vim.opt.updatetime = 250
 vim.wo.signcolumn = "yes"
+vim.opt.termguicolors = true
 
 -- Set colorscheme
 --vim.cmd [[colorscheme onedark]]
@@ -50,6 +51,7 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.splitkeep = "cursor"
+vim.opt.cursorline = true
 vim.o.hlsearch = false
 vim.lsp.enable("ts_ls")
 
@@ -62,12 +64,16 @@ vim.keymap.set("n", ";a", "<cmd>AerialToggle!<CR>")
 
 vim.opt.updatetime = 500
 
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
--- 	virtual_text = true,
--- 	underline = true,
--- 	signs = true,
--- })
-
+vim.diagnostic.config({
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	float = {
+		border = "rounded",
+		focusable = true,
+		header = false,
+	},
+})
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx)
 	require("ts-error-translator").translate_diagnostics(err, result, ctx)
 	vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx)
